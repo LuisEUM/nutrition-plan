@@ -1,12 +1,11 @@
 {
   "/page": "app/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
   "/desayunos/page": "app/desayunos/page.js",
-  "/comidas/page": "app/comidas/page.js",
-  "/recomendaciones/page": "app/recomendaciones/page.js",
   "/media-manana/page": "app/media-manana/page.js",
+  "/comidas/page": "app/comidas/page.js",
   "/meriendas/page": "app/meriendas/page.js",
   "/cenas/page": "app/cenas/page.js",
-  "/planificador/page": "app/planificador/page.js"
+  "/recomendaciones/page": "app/recomendaciones/page.js",
+  "/planificador/page": "app/planificador/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }

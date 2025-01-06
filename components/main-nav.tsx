@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Menu } from "lucide-react";
+import { Button } from "./ui/button";
+import { useState } from "react";
 
 const navItems = [
   {
@@ -41,21 +44,61 @@ const navItems = [
 
 export function MainNav() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className='flex items-center space-x-4 lg:space-x-6'>
-      {navItems.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          className={cn(
-            "text-sm font-medium transition-colors hover:text-primary",
-            pathname === item.href ? "text-primary" : "text-muted-foreground"
-          )}
+    <div className='w-full'>
+      <div className='flex justify-between items-center'>
+        {/* Mobile Menu Button */}
+        <Button
+          variant='ghost'
+          className='lg:hidden'
+          onClick={() => setIsOpen(!isOpen)}
         >
-          {item.title}
-        </Link>
-      ))}
-    </nav>
+          <Menu className='h-6 w-6' />
+        </Button>
+
+        {/* Desktop Menu */}
+        <nav className='hidden lg:flex items-center space-x-6 overflow-x-auto'>
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary whitespace-nowrap",
+                pathname === item.href
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              )}
+            >
+              {item.title}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className='fixed inset-x-0 top-[57px] z-50 lg:hidden'>
+          <nav className='mx-auto bg-background border rounded-md p-4 shadow-lg container'>
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className={cn(
+                  "block w-full text-sm font-medium transition-colors hover:text-primary px-2 py-1.5 rounded-md hover:bg-muted",
+                  pathname === item.href
+                    ? "text-primary bg-muted"
+                    : "text-muted-foreground"
+                )}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
+    </div>
   );
 }
